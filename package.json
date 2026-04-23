@@ -1,18 +1,18 @@
 {
   "name": "github-wiki-sidebar",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Automaticaly generate a multi-level github wiki sidebar menu (_Sidebar.md) from the filenames in the wiki repository",
   "main": "bin/github-wiki-sidebar.js",
   "scripts": {
-    "lint": "eslint index.js bin",
+    "lint": "eslint bin data --fix",
     "github-wiki-sidebar": "node ./bin/github-wiki-sidebar.js"
   },
   "bin": {
-    "github-wiki-sidebar": "./bin/github-wiki-sidebar.js"
+    "github-wiki-sidebar": "bin/github-wiki-sidebar.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adriantanasa/github-wiki-sidebar.git"
+    "url": "git+https://github.com/morris-kelly/github-wiki-sidebar.git"
   },
   "pre-commit": [
     "lint"
@@ -31,19 +31,23 @@
     "git wiki sidebar",
     "sidebar generator"
   ],
-  "author": "Adrian Tanasa <adrian_tanasa@yahoo.com>",
+  "author": "Adrian Tanasa <adrian_tanasa@yahoo.com>, Morris Kelly <morris-kelly@synapt.ec>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/adriantanasa/github-wiki-sidebar/issues"
+    "url": "https://github.com/morris-kelly/github-wiki-sidebar/issues"
   },
-  "homepage": "https://github.com/adriantanasa/github-wiki-sidebar#readme",
+  "homepage": "https://github.com/morris-kelly/github-wiki-sidebar#readme",
   "dependencies": {
-    "git-wiki-to-html": "~0.3.0",
-    "inquirer": "^6.0.0",
-    "shelljs": "^0.8.2",
-    "chalk": "^2.4.1"
+    "chalk": "^2.4.1",
+    "git-wiki-to-html": "^0.2.4",
+    "inquirer": "^13.3.0",
+    "shelljs": "^0.8.2"
   },
   "devDependencies": {
-    "eslint": "^4.19.1"
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
+    "@eslint/json": "^1.0.1",
+    "eslint": "^10.0.3",
+    "globals": "^17.4.0"
   }
 }
