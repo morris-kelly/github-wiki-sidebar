@@ -70,23 +70,31 @@ const buildSidebar = function (
 
   if (doSidebar) {
     debug("Build the _Sidebar.md file ...");
-    let pathBin = path.join(baseDir, "../node_modules/.bin/git-wiki-to-html");
-    let result = shell.exec("node " + pathBin + " --template=markdown", {
+    let pathBin = path.join(
+      baseDir,
+      "../node_modules/git-wiki-to-html/bin/git-wiki-to-html.js",
+    );
+    let result = shell.exec(`node "${pathBin}" --template=markdown`, {
       silent: true,
-    }).stdout;
-    if (result.match(/DONE/g)) {
+    });
+    if (result.code === 0 && result.stdout.match(/DONE/g)) {
       let credentialStr = shell.ShellString(credentials);
       if (!skipCredentials)
         credentialStr.toEnd(path.join(workDir, "_Sidebar.md"));
       myConsole.log(chalk.bold("\n_Sidebar.md generated."));
     } else {
-      myConsole.log("Error generating _Sidebar.md: " + result);
+      let errorOutput = (result.stderr || result.stdout || "Unknown error")
+        .toString()
+        .trim();
+      myConsole.log("Error generating _Sidebar.md: " + errorOutput);
     }
   }
 
   if (doClean) {
     debug("Removing temporary options.json file");
-    shell.exec("rm " + optionFilePath);
+    if (fs.existsSync(optionFilePath)) {
+      fs.unlinkSync(optionFilePath);
+    }
   }
 
   if (doGit) {
